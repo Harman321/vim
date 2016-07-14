@@ -41,7 +41,7 @@ set ruler
 "set nowrap
 
 "在状态栏显示正在输入的命令
-"set showcmd
+set showcmd
 
 "设置历史记录条数
 set history=10000
@@ -111,7 +111,7 @@ Plugin 'VundleVim/Vundle.vim'
 
 
 Plugin 'majutsushi/tagbar'
-map <silent>tl :TagbarToggle<CR>	"快捷键设置
+map <silent>tl :TagbarToggle<CR>        "快捷键设置
 let g:tagbar_ctags_bin='ctags'            "ctags程序的路径
 let g:tagbar_width=30                    "窗口宽度的设置
 let g:tagbar_autofocus=1
@@ -128,11 +128,13 @@ let NERDTreeWinSize=20
 let NERDTreeChDirMode=2
 let NERDTreeIgnore=['\~$', '\.pyc$', '\.swp$']
 "let NERDTreeShowBookmarks=1
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
 
 " Automatically open a NERDTree if no files where specified
-autocmd vimenter * if !argc() | NERDTree | endif
+"autocmd vimenter * if !argc() | NERDTree | endif
 " Close vim if the only window left open is a NERDTree
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 " Open a NERDTree
 
 
