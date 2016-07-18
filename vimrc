@@ -2,12 +2,6 @@
 "    Vim基本配置
 "===================================
 
-
-"设置编码方式
-set encoding=utf-8
-"自动判断编码时 依次尝试一下编码
-set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
-
 "指定配色方案为256色
 set t_Co=256
 
@@ -27,7 +21,6 @@ set backspace=indent,eol,start
 "显示行号
 set number
 
-
 "为方便复制，用<F2>开启/关闭行号显示
 nnoremap <F2> :set nonumber!<CR>:set foldcolumn=0<CR>
 nmap <F3> :Tagbar<CR>
@@ -41,14 +34,14 @@ set ruler
 "set nowrap
 
 "在状态栏显示正在输入的命令
-set showcmd
+"set showcmd
 
 "设置历史记录条数
 set history=10000
 
 "设置取消备份 禁止临时文件生成
 set nobackup
-"set noswapfile
+set noswapfile
 
 "突出现实当前行列
 "set cursorline
@@ -88,6 +81,10 @@ set smarttab
 "将Tab键自动转换成空格 真正需要Tab键时使用[Ctrl + V + Tab]
 set expandtab
 
+"设置编码方式
+set encoding=utf-8
+"自动判断编码时 依次尝试一下编码
+set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
 
 "检测文件类型
 filetype on
@@ -97,6 +94,11 @@ filetype indent on
 filetype plugin on
 "启动智能补全
 filetype plugin indent on
+
+
+if has("autocmd")
+    au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -111,11 +113,10 @@ Plugin 'VundleVim/Vundle.vim'
 
 
 Plugin 'majutsushi/tagbar'
-map <silent>tl :TagbarToggle<CR>        "快捷键设置
+map <silent>tl :TagbarToggle<CR>	"快捷键设置
 let g:tagbar_ctags_bin='ctags'            "ctags程序的路径
 let g:tagbar_width=30                    "窗口宽度的设置
 let g:tagbar_autofocus=1
-let g:tagbar_sort = 0
 autocmd BufReadPost *.cpp,*.c,*.h,*.hpp,*.cc,*.cxx call tagbar#autoopen()
 "如果是c语言的程序的话，tagbar自动开启
 
@@ -128,13 +129,11 @@ let NERDTreeWinSize=20
 let NERDTreeChDirMode=2
 let NERDTreeIgnore=['\~$', '\.pyc$', '\.swp$']
 "let NERDTreeShowBookmarks=1
-let g:NERDTreeDirArrowExpandable = '▸'
-let g:NERDTreeDirArrowCollapsible = '▾'
 
 " Automatically open a NERDTree if no files where specified
-"autocmd vimenter * if !argc() | NERDTree | endif
+autocmd vimenter * if !argc() | NERDTree | endif
 " Close vim if the only window left open is a NERDTree
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 " Open a NERDTree
 
 
@@ -190,9 +189,8 @@ nnoremap <C-K> <C-W><C-K> "Ctrl-k to move up a split
 nnoremap <C-L> <C-W><C-L> "Ctrl-l to move    right a split  
 nnoremap <C-H> <C-W><C-H> "Ctrl-h to move left a split
 
-inoremap <C-F>             <C-X><C-F>
-inoremap <C-D>             <C-X><C-D>
-inoremap <C-L>             <C-X><C-L>
+
+
 
 function Do_CsTag()
     let dir = getcwd()
