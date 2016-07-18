@@ -41,7 +41,7 @@ set history=10000
 
 "设置取消备份 禁止临时文件生成
 set nobackup
-set noswapfile
+"set noswapfile
 
 "突出现实当前行列
 "set cursorline
