@@ -11,6 +11,15 @@ set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
 "指定配色方案为256色
 set t_Co=256
 
+
+" go config
+filetype off
+filetype plugin indent off
+set runtimepath+=$GOROOT/misc/vim
+filetype plugin indent on
+
+autocmd FileType go autocmd BufWritePre <buffer> Fmt
+
 "开启语法高亮功能
 syntax enable
 syntax on
@@ -27,6 +36,8 @@ set backspace=indent,eol,start
 "显示行号
 set number
 
+" 设置粘贴
+set pastetoggle=<F11>
 
 "为方便复制，用<F2>开启/关闭行号显示
 nnoremap <F2> :set nonumber!<CR>:set foldcolumn=0<CR>
@@ -76,6 +87,7 @@ set ignorecase
 
 "设置在Vim中可以使用鼠标 防止在Linux终端下无法拷贝
 set mouse=a
+"set mouse=v
 
 "设置Tab宽度
 set tabstop=4
@@ -150,8 +162,16 @@ map <F11> :MBEbp<CR>
 map <F12> :MBEbn<CR>
 
 Plugin 'Lokaltog/vim-powerline'
-set laststatus=2
+set laststatus=1
 let g:Powerline_symbols='unicode'
+
+
+
+
+Plugin 'fatih/vim-go'
+
+
+"Plugin 'Valloric/YouCompleteMe'
 
 
 " All of your Plugins must be added before the following line
