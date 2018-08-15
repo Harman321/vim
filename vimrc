@@ -70,7 +70,7 @@ set incsearch
 "set showmatch
 
 "设置C/C++方式自动对齐
-set autoindent
+"set autoindent
 set cindent
 
 " Display extra whitespace
